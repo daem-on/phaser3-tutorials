@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head>
+<title>Phaser 3 Tutorials</title>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="uikit/js/uikit.min.js"></script>
+<script src="uikit/js/uikit-icons.min.js"></script>
+<link rel="stylesheet" href="uikit/css/uikit.min.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+<body>
+
+<div class="uk-container" id="main">
+    <div class="uk-animation-slide-top" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-item">
+                <span uk-icon="icon: cog; ratio: 2"></span>&nbsp
+                <a class="uk-logo" onclick="loadPage('main')">Phaser 3 Tutorials</span></a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Content loading target -->
+    <div id="loadTo" class="uk-padding">
+        <div class="uk-position-center" uk-spinner></div>
+    </div>
+</div>
+
+<script src="list.js"></script>
+<script src="app.js"></script>
+
+<link rel="stylesheet" href="hljs/styles/atom-one-light.css">
+<script src="hljs/highlight.pack.js"></script>
+</body></html>
+
+<!-- Created by Daemon // daemonw.com -->

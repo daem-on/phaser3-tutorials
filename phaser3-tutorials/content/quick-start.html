@@ -1,0 +1,81 @@
+<h1>Quick Start Guide</h1>
+
+<h2>A short introduction to Phaser</h2>
+<p>If you haven't used Phaser before, you should check out the vast amount of tutorials and starting guides that are available. The previous version of Phaser is maintained by the community, and thus titled Phaser Community Edition.</p>
+
+<p>Phaser is a game engine for writing games in JavaScript, and all you have to do to set it up is include the phaser.js file in your game's folder. Then, you can create an index.html file with the line <code>&lt;script src=&quot;phaser.js&quot;&gt;&lt;/script&gt;</code> included. You can then create a game.js file as well, where you will write the code to your game, and include that in the index.html. This is basically all that is needed to get Phaser up and running, continue with the next part to find out how to actually create your game.</p>
+
+<h2>Setting up scenes</h2>
+
+<div class="uk-alert"><span class="uk-label">Examples</span>
+Check out the <a href="http://labs.phaser.io/index.html?dir=scenes/">Phaser 3 examples directory</a> for this topic.</div>
+
+<p>If you're familiar with Phaser 2, you know how states are used in it to control the flow of the game. Phaser 3 has scenes instead of states and these are even more versatile, and can be created several different ways (from a function, an object, a class, an instance, see the examples/scenes directory). Here, I will use what I believe is the simplest one: creating from an object, where you only have to specify the functions it uses for <i>preload</i> and <i>create</i>.</p>
+
+<pre><code>var config = {
+    type: Phaser.WEBGL,
+    width: 800,
+    height: 600,
+    scene: {
+        preload: preload,
+        create: create
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload () {
+	//preload
+}
+
+function create () {
+    //create
+}
+</code></pre>
+
+<p>As you can see from the code above, the actual game instance is created with <code>new Phaser.Game()</code>, and you have to provide a config object with the settings. Of course you don't have to declare this before, it can be part of the Phaser.Game() statement.</p>
+<p>In Phaser 3, things like the GameObjectFactory and Loader belong to the scene instead of the game instance. In preload for example, you load an image with <code>this.load.image()</code>.</p>
+
+<h2>Loading</h2>
+
+<div class="uk-alert"><span class="uk-label">Examples</span>
+Check out the <a href="http://labs.phaser.io/index.html?dir=loader/">Phaser 3 examples directory</a> for this topic.</div>
+
+<p>You can load files just like in Phaser 2, using <code>this.load.image(key, filename)</code>. The key is later used for identification, and the filename will have to include the path of the file if it's not in the same directory as index.html. You can use another method, where you specify where your image files are kept and then only give a list of keys, Phaser will find image files in that folder that have the same name as the keys and will import them.</p>
+<pre><code>this.load.path = 'assets/pics/';
+
+this.load.image([
+	{ key: 'sukasuka-chtholly' },
+	{ key: 'taikodrummaster', extension: 'jpg' }
+]);</code></pre>
+<p>This way, you don't include the extention of the file, and you have to specify in case it isn't the default .png; if you've got all of your images in the same folder, you may find this very useful.</p>
+<p>Spritesheets and Texture atlases also have parameters you have to specify in order to load them, check out the examples directory know more.</p>
+
+<pre><code>function load() {
+	this.load.spritesheet('explosion', 'assets/sprites/explosion.png', { frameWidth: 64, frameHeight: 64, endFrame: 23 });
+	this.load.atlas('megaset', 'assets/atlas/megaset-0.png', 'assets/atlas/megaset-0.json');
+}</code></pre>
+
+<h2>Creating objects</h2>
+
+<div class="uk-alert"><span class="uk-label">Examples</span>
+Check out the <a href="http://labs.phaser.io/index.html?dir=game%20objects/">Phaser 3 examples directory</a> for this topic.</div>
+
+<p>Creating sprites is just like in Phaser 2, only the GameObjectFactory is accessed in a different way, but <code>bunny = this.add.sprite(400, 300, 'bunny');</code> works like you would expect, creating a sprite at coordinates 400, 300 from an image loaded with the key 'bunny'. Obviously you have to load the image you want to use as a texture before you create the sprite (unless you're doing some extra tricky stuff). You can also use <code>this.make.sprite(config)</code> with a custom config object, where you can specify things like x and y, flipping the image, or choosing one image at random from an array.</p>
+
+<pre><code>var config2 = {
+	key: [ 'bunny', 'atari', 'logo' ],
+	x: 400,
+	y: 300,
+	flipX: true
+};</code></pre>
+
+<p>You can also easily create texts, and set their properties with a config object.</p>
+<pre><code>this.add.text(100, 200, 'Phaser', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });</code></pre>
+
+<h2>Conclusion</h2>
+<p>Thanks for reading this tutorial <i uk-icon="icon: heart"></i>! I really hope it helps you get started with the new features in Phaser 3. There's currently no more pages on this site that you could read next, but check back later, maybe I'll have made more tutorials. If you would like to contribute, look at the bottom of the main page.<p>
+
+
+<hr style="margin-top: 200px">
+<div class="uk-text-meta">Written by Daemon &copy; 2018</div>
