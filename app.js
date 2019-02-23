@@ -19,10 +19,18 @@ function AJAX(request, callback, method="GET") {
     return true;
 }
 
-if (window.location.hash != "") {
-	loadPage(window.location.hash.slice(1));
-} else {
-	loadPage("main");
+function currentPage() {
+    if (window.location.hash != "") {
+    	loadPage(window.location.hash.slice(1));
+    } else {
+    	loadPage("main");
+    }
+}
+
+currentPage();
+
+window.onhashchange = () => {
+    currentPage();
 }
 
 
@@ -30,7 +38,7 @@ if (window.location.hash != "") {
 function loadPage(id) {
 	AJAX("content/" + id + ".html", showPage);
 	window.location.hash = id;
-	
+
 	switch (id) {
 		case "search":
 			onContentLoad = function() {setupSearchPage()};
@@ -55,7 +63,7 @@ function setupSearchPage() {
 	result.id = "searchResult";
 	var button = document.createElement("button");
 	button.innerHTML = "Search";
-	
+
 	button.onclick = function() {
 		var results = search(document.getElementById("search").value.split(","));
 		var content = document.getElementById("searchResult");
@@ -64,13 +72,13 @@ function setupSearchPage() {
 			var a = document.createElement("a");
 			a.href = result.href;
 			a.innerHTML = result.name;
-			
+
 			content.appendChild(document.createElement("br"));
 			content.appendChild(a);
 		});
 	}
-	
-	
+
+
 	content.appendChild(input);
 	content.appendChild(button);
 	content.appendChild(result);
